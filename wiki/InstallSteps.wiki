@@ -14,6 +14,7 @@ If you are using Ubuntu or Debian Linux, you can download and install the Gswitc
 
 === Step 1 ===
 On your GNOME desktop, goto: System &gt; Preferences &gt; Startup Applications.
+
 [http://gswitch.googlecode.com/svn/wiki/background1.jpg]
 
 === Step 2 ===
@@ -27,6 +28,7 @@ Type the following into the appropriate boxes, as detailed below:
   * Command: /usr/bin/gswitch -t 30
 
 *Please note that if you want your background to change more or less frequently, you should adjust the "30" to the number of minutes you want. For example, if you want the desktop background to change only once per hour, put 60 here. Likewise, if you want it to change every quarter hour, put 15.*
+
 [http://gswitch.googlecode.com/svn/wiki/background3.jpg]
 
 
@@ -35,13 +37,16 @@ This section shows you how to add more backgrounds.
 
 === Step 1 ===
 On your GNOME desktop, goto: System &gt; Preferences &gt; Appearance.
+
 [http://gswitch.googlecode.com/svn/wiki/session1.jpg]
 
 === Step 2 ===
 Click on the "Background" tab.
-[http://gswitch.googlecode.com/svn/wiki/session1.jpg]
+
+[http://gswitch.googlecode.com/svn/wiki/session2.jpg]
 
 === Step 3 ===
 Click on "Add" and browse to the image you want to include. Don't forget to set the right style for your image (one of: Tiled, Zoom, Centered, Scaled and Fill).
 *Please note that newly added backgrounds won't be shown until your next login.*
-[http://gswitch.googlecode.com/svn/wiki/session1.jpg]
+
+[http://gswitch.googlecode.com/svn/wiki/session3.jpg]
