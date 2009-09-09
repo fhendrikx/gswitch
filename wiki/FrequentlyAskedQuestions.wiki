@@ -1,0 +1,7 @@
+= FAQ =
+
+== General ==
+
+*What version of Ubuntu/Debian will this work with?*
+
+The code was written on an Ubuntu 9.04 system, however it should work nicely with other versions. Let me know if you're having problems and I'll see what I can do.
