@@ -12,7 +12,9 @@ If you are using Ubuntu or Debian Linux, you can download and install the Gswitc
 You can also download the source and install it yourself. Simply copy all of the source directories from that tar.gz, or only copy the actual program, as shown here:
 
 `tar zxf gswitch_src.tar.gz`
+
 `cp -v gswitch/usr/bin/gswitch /usr/bin/`
+
 `chmod +x /usr/bin/gswitch`
 
 
