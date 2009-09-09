@@ -1,0 +1,182 @@
+#!/usr/bin/perl -w
+######################################################################
+# GNOME2 background switcher, v1.0 by Ferry Hendrikx, August 2009.
+#
+# This background switcher utilises your existing background settings
+# by randomly switching between images and styles that you have setup
+# previously.
+######################################################################
+
+use strict;
+
+use constant CONFIG => '/.gnome2/backgrounds.xml';
+use constant DELAY  => 20;
+
+use Gnome2::GConf;
+use User::pwent;
+use XML::Simple;
+
+
+######################################################################
+# functions
+######################################################################
+
+sub load_images
+{
+    my $debug = shift;
+
+    # calculate path
+
+    my $user = getpwuid($<) or die "error: cannot get user entry: $!\n";
+    my $path = $user->dir.CONFIG;
+
+    # read and parse the file
+
+    my $config = XMLin($path);
+    my @images;
+
+    # process the entries
+
+    foreach my $entry (keys %{$config->{wallpaper}})
+    {
+        if ($entry =~ /\.(gif|jpg|png)/i)
+        {
+            if ($config->{wallpaper}->{$entry}->{deleted} !~ /true/i)
+            {
+                # new entry
+
+                my $rec = ();
+                $rec->{path} = $config->{wallpaper}->{$entry}->{filename};
+                $rec->{type} = $config->{wallpaper}->{$entry}->{options};
+
+                print "gswitch: path: ".$rec->{path}.", zoom: ".$rec->{type}."\n" if ($debug);
+
+                # sanity check
+
+                if (length($rec->{type}) == 0)
+                {
+                    $rec->{type} = "zoom";
+                }
+
+                # save for later
+
+                if (length($rec->{path}) != 0)
+                {
+                    push(@images, $rec);
+                }
+            }
+        }
+    }
+
+    $config = undef;
+
+    return (@images);
+}
+
+sub sort_images
+{
+    my $images = shift;
+    my $i = @$images;
+
+    # Fisher-Yates shuffle
+
+    while ($i--)
+    {
+        my $j = int(rand($i+1));
+        next if $i == $j;
+        @$images[$i,$j] = @$images[$j,$i];
+    }
+}
+
+sub next_image
+{
+    my ($client, $images, $imgpos, $debug) = @_;
+
+    # set image style and path
+
+    $client->set("/desktop/gnome/background/picture_options",  
+        { type => 'string', value => $images->[$imgpos]->{type} });
+
+    print "gswitch: type: ".$images->[$imgpos]->{type}."\n" if ($debug);
+
+    $client->set("/desktop/gnome/background/picture_filename", 
+        { type => 'string', value => $images->[$imgpos]->{path} });
+
+    print "gswitch: path: ".$images->[$imgpos]->{path}."\n" if ($debug);
+}
+
+
+######################################################################
+# main
+######################################################################
+
+my $debug = 0;
+my $sleep = DELAY * 60;
+
+# arguments
+
+while (@ARGV)
+{
+    my $arg = shift;
+
+    if    ($arg eq '-d')
+    {
+        $debug = 1;
+        $sleep = 10;
+    }
+    elsif ($arg eq '-h')
+    {
+        print <<EOF;
+gswitch [-d] [-t <minutes>]
+
+    -d
+        Enable debug mode. Images are switched every 10 seconds
+        and information is dumped to the terminal. Use of this 
+        option is only recommended when running from a terminal
+
+    -t <minutes>
+        Sets the time in minutes before the background image is
+        switched for another.
+
+EOF
+
+        exit(0);
+    }
+    elsif ($arg eq '-t')
+    {
+        $arg = shift;
+        $sleep = int($arg) * 60;
+    }
+}
+
+# client
+
+my $client = Gnome2::GConf::Client->get_default;
+my @images = &load_images($debug);
+my $imgpos = $#images;
+
+# sanity check
+
+die "error: no images found\n" if ($#images < 0);
+
+# cycle through the images forever
+
+print "gswitch: sleep time is $sleep seconds\n" if ($debug);
+srand(time);
+
+while (1)
+{
+    # re-sort?
+    if ($imgpos == $#images)
+    {
+        &sort_images(\@images);
+        $imgpos = 0;
+    }
+
+    # next image
+    &next_image($client, \@images, $imgpos++, $debug);
+
+    # sleep
+    sleep($sleep);
+}
+
