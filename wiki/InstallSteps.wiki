@@ -1,16 +1,23 @@
 = Installation =
 
-This document shows you how to start Gswitch automatically on every login and how you can easily add more background images.
+This document shows you how to install Gswitch, start Gswitch automatically on every login and how you can easily add more background images.
 
 
 == Package installation ==
 
-If you are using Ubuntu or Debian Linux, you can download and install the Gswitch debian package.
+If you are using Ubuntu or Debian Linux, you can download and install the Gswitch debian package. This can be installed as follows:
 
 `dpkg -i gswitch.deb`
 
+You can also download the source and install it yourself. Simply copy all of the source directories from that tar.gz, or only copy the actual program, as shown here:
+
+`tar zxf gswitch_src.tar.gz`
+`cp -v gswitch/usr/bin/gswitch /usr/bin/`
+`chmod +x /usr/bin/gswitch`
+
 
 == Installing Gswitch ==
+This step ensures that Gswitch runs automatically at every login.
 
 === Step 1 ===
 On your GNOME desktop, goto: System &gt; Preferences &gt; Startup Applications.
