@@ -22,7 +22,7 @@ You can also download the source and install it yourself. Simply copy all of the
 This step ensures that Gswitch runs automatically at every login.
 
 === Step 1 ===
-On your GNOME desktop, goto: System &gt; Preferences &gt; Startup Applications.
+On your GNOME desktop, goto: System > Preferences > Startup Applications.
 
 [http://gswitch.googlecode.com/svn/wiki/session1.jpg]
 
@@ -45,7 +45,7 @@ Type the following into the appropriate boxes, as detailed below:
 This section shows you how to add more backgrounds.
 
 === Step 1 ===
-On your GNOME desktop, goto: System &gt; Preferences &gt; Appearance.
+On your GNOME desktop, goto: System > Preferences > Appearance.
 
 [http://gswitch.googlecode.com/svn/wiki/background1.jpg]
 
