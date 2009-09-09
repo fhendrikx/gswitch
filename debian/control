@@ -1,0 +1,16 @@
+Source: gswitch
+Section: gnome
+Priority: optional
+Maintainer: Ferry Hendrikx <ferry.hendrikx@gmail.com>
+Standards-Version: 3.6.1.0
+
+Package: gswitch
+Architecture: all
+Depends: libgnome2-gconf-perl, libxml-simple-perl
+Description: Show random GNOME desktop backgrounds
+ Gswitch automatically changes your GNOME desktop background every 't' minutes 
+ (where t defaults to 20 and can be changed easily changed).
+ Background images and style settings are sourced from your list of backgrounds 
+ as configured in 'System > Preferences > Appearance'. By default, images are 
+ switched after 20 minutes. Although the images are shown randomly, every image 
+ will be shown before you see any repeats.
