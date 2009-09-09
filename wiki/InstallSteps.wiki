@@ -5,9 +5,23 @@ This document shows you how to install Gswitch, start Gswitch automatically on e
 
 == Package installation ==
 
-If you are using Ubuntu or Debian Linux, you can download and install the Gswitch debian package. This can be installed as follows:
+Gswitch has the following package dependencies:
+  *libgnome2-gconf-perl
+  *libxml-simple-perl
+
+You can install these via either synaptic or apt-get.
+
+
+=== Install from deb ===
+
+If you are using Ubuntu or Debian Linux, you can download and install the Gswitch debian package. 
+
+This can be installed as follows:
 
 `dpkg -i gswitch.deb`
+
+
+=== Install from source ===
 
 You can also download the source and install it yourself. Simply copy all of the source directories from that tar.gz, or only copy the actual program, as shown here:
 
