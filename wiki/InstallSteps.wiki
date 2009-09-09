@@ -6,8 +6,8 @@ This document shows you how to install Gswitch, start Gswitch automatically on e
 == Package installation ==
 
 Gswitch has the following package dependencies:
-  *libgnome2-gconf-perl
-  *libxml-simple-perl
+  * libgnome2-gconf-perl
+  * libxml-simple-perl
 
 You can install these via either synaptic or apt-get.
 
