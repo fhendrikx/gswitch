@@ -27,6 +27,11 @@
 <li>Command: /usr/bin/gswitch -t 30</li>
 </ul>
 <p>Please note that if you want your background to change more or less frequently, you should adjust the "30" to the number of minutes you want. For example, if you want the desktop background to change only once per hour, put 60 here. Likewise, if you want it to change every quarter hour, put 15.</p>
+<p>If you want gswitch to wait 60 seconds when it starts (before doing anything else), add the "-p" flag to the command above. This delays gswitch from loading a new background when it is started and is most useful when starting a new GNOME session on slower hardware. The above would become:</p>
+<ul>
+<li>Command: /usr/bin/gswitch -p -t 30</li>
+</ul>
+
 <img src="session3.jpg">
 
 <a name="background"><h2>Adding more backgrounds</h2></a>

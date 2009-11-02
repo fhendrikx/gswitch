@@ -1,3 +1,10 @@
+gswitch (1.1-1) unstable; urgency=low
+
+  * Added pause option
+  * Minor changes to documentation
+
+ -- Ferry Hendrikx <ferry.hendrikx@gmail.com>  Wed,  3 Nov 2009 12:00:00 +1200
+
 gswitch (1.0-1) unstable; urgency=low
 
   * Initial Revision

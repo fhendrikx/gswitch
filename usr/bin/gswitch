@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 ######################################################################
-# GNOME2 background switcher, v1.0 by Ferry Hendrikx, August 2009.
+# GNOME2 background switcher, v1.1 by Ferry Hendrikx, August 2009.
 #
 # This background switcher utilises your existing background settings
 # by randomly switching between images and styles that you have setup
@@ -111,6 +111,7 @@ sub next_image
 ######################################################################
 
 my $debug = 0;
+my $pause = 0;
 my $sleep = DELAY * 60;
 
 # arguments
@@ -122,6 +123,7 @@ while (@ARGV)
     if    ($arg eq '-d')
     {
         $debug = 1;
+        $pause = 0;
         $sleep = 10;
     }
     elsif ($arg eq '-h')
@@ -132,15 +134,26 @@ gswitch [-d] [-t <minutes>]
     -d
         Enable debug mode. Images are switched every 10 seconds
         and information is dumped to the terminal. Use of this 
-        option is only recommended when running from a terminal
+        option is only recommended when running from a terminal.
+
+    -p
+        Enable pause. Stops the program from doing anything for 
+        one minute. Useful if you have a slow machine that takes
+        a while to start GNOME and you don't want gswitch adding
+        to the pain.
 
     -t <minutes>
         Sets the time in minutes before the background image is
-        switched for another.
+        switched for another. If you don't specify this time, 
+        it will default to 20 minutes.
 
 EOF
 
         exit(0);
+    }
+    elsif ($arg eq '-p')
+    {
+        $pause = 1;
     }
     elsif ($arg eq '-t')
     {
@@ -159,6 +172,13 @@ my $imgpos = $#images;
 
 die "error: no images found\n" if ($#images < 0);
 
+# pause
+
+if ($pause)
+{
+    sleep (60);
+}
+
 # cycle through the images forever
 
 print "gswitch: sleep time is $sleep seconds\n" if ($debug);
@@ -169,8 +189,8 @@ while (1)
     # re-sort?
     if ($imgpos == $#images)
     {
-        &sort_images(\@images);
         $imgpos = 0;
+        &sort_images(\@images);
     }
 
     # next image
